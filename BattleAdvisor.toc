@@ -1,0 +1,14 @@
+## Interface: 30300
+## Title: BattleAdvisor
+## Author: Dantelion
+## Notes: This addon provide a way to come up with a quick strategy for BGs.
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: AV,WSG,IoC,AB,EotS
+BattleAdvisor.lua
+BattleAdvisor.xml
+Battlegrounds.lua
+BattleAdvisor1.lua
+Helpers.lua
+Helpers-Graphical-.lua
+Helpers-Engine-.lua
