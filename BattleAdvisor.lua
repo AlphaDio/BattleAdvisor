@@ -13,7 +13,7 @@ function BattleAdvisorAddon:OnInitialize()
     BattleAdvisorAddon:RegisterChatCommand("ba", "BattleAdvisor_SlashProcessor")
     BattleAdvisorAddon:RegisterChatCommand("battleadvisor", "BattleAdvisor_SlashProcessor")
 
-    loadBattlegrounds()
+    --loadBattlegrounds()
 
 end
 
@@ -35,7 +35,9 @@ end
 -- user or called by another program.
 function BattleAdvisor_SlashProcessor(msg)
     if msg == 'show' then
+        print("show")
     elseif msg == 'hide' then
+        print("hide")
     else
         print("Syntax: /ba or /battleadvisor.\n" ..
                 "Available options:\n" .. "-show\n-hide");
@@ -59,7 +61,7 @@ function StartFrames()
     AB_Button:SetHeight(35)
     AB_Button:SetText("AB")
     AB_Button:SetCallback("BG_ButtonClick")
-    AB_Button.BG = AV
+    --AB_Button.BG = AV
     BA_MainFrame:AddChild(AB_Button)
 end
 
