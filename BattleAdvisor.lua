@@ -71,14 +71,14 @@ function StartFrames()
     AB_Button:SetHeight(35)
     AB_Button:SetText("AB")
     AB_Button:SetCallback("BG_ButtonClick")
-    AB_Button:BG = AV
+    AB_Button.BG = AV
     BA_MainFrame:AddChild(AB_Button)
 end
 
 
 function BG_ButtonClick(widget)
     -- Get the BG we are talking about
-    local bg = widget:BG
+    local bg = widget.BG
 
     print("" .. bg.title .. " Button Clicked!" )
 end
