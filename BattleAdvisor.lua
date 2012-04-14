@@ -3,6 +3,7 @@
 -- STARTING MAIN CODE --
 
 local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0")
+local AceGUI = LibStub("AceGUI-3.0")
 
 -- When the addon is initialized and loaded.
 function BattleAdvisorAddon:OnInitialize()
