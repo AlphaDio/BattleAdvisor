@@ -45,13 +45,23 @@ function BattleAdvisor_SlashProcessor(msg)
 end
 
 function StartFrames()
-    local BA_MainFrame = AceGUI:Create("Frame")
+    BA_MainFrame = AceGUI:Create("Frame")
     BA_MainFrame:SetTitle("Battle Advisor Main Frame")
+    BA_MainFrame:SetWidth("250")
+    BA_MainFrame:SetHeight("140")
     BA_MainFrame:SetStatusText("AceGUI-3.0 Example Container Frame")
     -- When the frame is closed
     BA_MainFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
     BA_MainFrame:SetLayout("Flow")
     print "-- Battle Advisor Main Frame Created!"
+
+    -- Add a button for AB
+    local AB_Button = AceGUI:Create("Button")
+    AB_Button:SetWidth(35)
+    AB_Button:SetHeight(35)
+    AB_Button:SetText("AB")
+    AB_Button:SetCallback("AB_ButtonClick")
+    BA_MainFrame:AddChild(AB_Button)
 end
 
 
