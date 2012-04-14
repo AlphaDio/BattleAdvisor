@@ -4,7 +4,7 @@
 
 local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0", "AceEvent-3.0", "AceComm-3.0")
 -- Embed An AceGUI instance to help with the creation of frames
-LibStub("AceGUI-3.0"):Embed(BattleAdvisorAddon)
+AceGUI = LibStub("AceGUI-3.0")
 
 -- When the addon is initialized and loaded.
 function BattleAdvisorAddon:OnInitialize()
@@ -45,7 +45,7 @@ function BattleAdvisor_SlashProcessor(msg)
 end
 
 function StartFrames()
-    local BA_MainFrame = BattleAdvisorAddon:Create("Frame")
+    local BA_MainFrame = AceGUI:Create("Frame")
     BA_MainFrame:SetTitle("Battle Advisor Main Frame")
     BA_MainFrame:SetStatusText("AceGUI-3.0 Example Container Frame")
     -- When the frame is closed
