@@ -1,5 +1,28 @@
 ﻿SLASH_BATTLEADVISOR1, SLASH_BATTLEADVISOR2 = '/ba', '/battleadvisor';
 
+-- STARTING MAIN CODE --
+
+local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0", "AceGUI-3.0")
+
+-- When the addon is initialized and loaded.
+function BattleAdvisorAddon:OnInitialize()
+
+    print "-- BattleAdvisor Started!"
+end
+
+-- When the addon is enabled.
+function BattleAdvisorAddon:OnEnable()
+
+end
+
+-- When the addon is disabled.
+function BattleAdvisorAddon:OnDisable()
+
+end
+
+-- END OF STARTING CODE --
+
+
 -- The function activated when the addon command is typed by the
 -- user or called by another program.
 function SlashCmdList.BATTLEADVISOR(msg, editbox)
