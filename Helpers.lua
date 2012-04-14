@@ -25,6 +25,7 @@ function BattleAdvisor_BGEvent(arg1)
     -- do stuffs
 end
 
+-- A function to register events to the frame.
 function registerBAEvents(Frame)
     -- Register the events at the main frame of the application
     

@@ -63,8 +63,6 @@ function createBGButton(bg_name)
     -- We first get the Bg object from the bg name
     local bg = getBattlegroundFromString(bg_name);
     
-    --
-    
     -- Now we create the button
     local bgButton = CreateFrame("Button", "bgButton", BA_MainFrame, "UIPanelButtonTemplate");
     bgButton:SetWidth(35);

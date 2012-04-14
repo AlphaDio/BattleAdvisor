@@ -6,7 +6,6 @@
 ## LoadOnDemand: 0
 ## SavedVariables: AV,WSG,IoC,AB,EotS
 BattleAdvisor.lua
-BattleAdvisor.xml
 Battlegrounds.lua
 BattleAdvisor1.lua
 Helpers.lua

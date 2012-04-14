@@ -44,26 +44,22 @@ function ConstructRoles(bg, strategy, selection)
                                  
     -- For each roles in the strategy
     for i=1, # roles do
-        local role = 
+        local role; 
         
         -- We need to know if we have a 'party' role
-        if (ro
     end
              
 end
 
 --  Perform a selection of players for each of the different roles in a strategy
 function perPlayerSelection(bg, strategy, selection)
-    
-    
-    
-        -- We gonna go through all the players in the bg currently
-        for i=1, maxPlayers do
-            -- the player we are going to record
-            player = {GetRaidRosterInfo(i)};
+    -- We gonna go through all the players in the bg currently
+    for i=1, maxPlayers do
+        -- the player we are going to record
+        player = {GetRaidRosterInfo(i)};
             
-            table.insert();
-        end
+        table.insert();
+    end
 end
 
 -- Perform a selection of groups for each of the different roles in a strategy
@@ -93,7 +89,6 @@ function battleground_message(message)
     end
     
     -- we have sent every lines of the string to /bg
-    
 end
 
 function assignGroups(spots, selection, maxGroups)
