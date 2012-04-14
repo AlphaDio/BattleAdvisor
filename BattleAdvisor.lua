@@ -3,18 +3,22 @@
 -- STARTING MAIN CODE --
 
 local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0", "AceEvent-3.0", "AceComm-3.0")
--- An AceGUI instance to help with the creation of frames
-local AceGUI = LibStub("AceGUI-3.0")
+-- Embed An AceGUI instance to help with the creation of frames
+LibStub("AceGUI-3.0"):Embed(BattleAdvisorAddon)
 
 -- When the addon is initialized and loaded.
 function BattleAdvisorAddon:OnInitialize()
-
     print "-- BattleAdvisor Started!"
+    -- Create the slash commands
+    BattleAdvisorAddon:RegisterChatCommand("ba", "BattleAdvisor_SlashProcessor")
+    BattleAdvisorAddon:RegisterChatCommand("battleadvisor", "BattleAdvisor_SlashProcessor")
+
 end
 
 -- When the addon is enabled.
 function BattleAdvisorAddon:OnEnable()
-
+    -- Create the frames
+    StartFrames()
 end
 
 -- When the addon is disabled.
@@ -27,7 +31,7 @@ end
 
 -- The function activated when the addon command is typed by the
 -- user or called by another program.
-function SlashCmdList.BATTLEADVISOR(msg, editbox)
+function BattleAdvisor_SlashProcessor(msg)
     if msg == 'show' then
         BA_MainFrame:Show();
         BA_PanelFrame:Hide();
@@ -39,6 +43,21 @@ function SlashCmdList.BATTLEADVISOR(msg, editbox)
                 "Available options:\n" .. "-show\n-hide");
     end
 end
+
+function StartFrames()
+    local BA_MainFrame = BattleAdvisorAddon:Create("Frame")
+    BA_MainFrame:SetTitle("Battle Advisor Main Frame")
+    BA_MainFrame:SetStatusText("AceGUI-3.0 Example Container Frame")
+    -- When the frame is closed
+    BA_MainFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+    BA_MainFrame:SetLayout("Flow")
+    print "-- Battle Advisor Main Frame Created!"
+end
+
+
+-- ========================================================
+-- LEGACY CODE
+-- ========================================================
 
 -- Executed when we load the AddOn.
 function BattleAdvisor_OnLoad()
