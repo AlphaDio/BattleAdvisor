@@ -19,8 +19,6 @@ function BattleAdvisorAddon:OnInitialize()
     BGAnnounce = nil;
     -- Placeholder for the selected strategy
     strategy = nil;
-    -- Tell if the addon is ready
-    enabled = false;
     -- Tell if we have recorded results
     recorded = false;
  
