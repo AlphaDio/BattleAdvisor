@@ -3,7 +3,6 @@
 -- available, or the maximum numbers of people in the battleground.
 function loadBattlegrounds()
 
-    print("Battlegrounds loaded!");
     
     -- Alterac Valley
     AV  =   {
@@ -237,6 +236,7 @@ function loadBattlegrounds()
     battlegrounds = { ["AV"] = AV, ["WSG"] = WSG, ["AB"] = AB, ["IoC"] = IoC, ["WG"] = WG,
         ["BoG"] = BoG, ["TP"] = TP, ["EotS"] = EotS, ["TB"] = TB};
     
+    print("Battlegrounds loaded!");
 end
 
 -- Get a Battleground object table from a battleground name

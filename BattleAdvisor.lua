@@ -12,6 +12,20 @@ function BattleAdvisorAddon:OnInitialize()
     -- Create the slash commands
     BattleAdvisorAddon:RegisterChatCommand("ba", "BattleAdvisor_SlashProcessor")
     BattleAdvisorAddon:RegisterChatCommand("battleadvisor", "BattleAdvisor_SlashProcessor")
+    -- Global variables
+    BGs =   {"Alterac Valley", "Isle of Conquest", "Warsong Gulch",
+                "Arathi Basin", "Eye of the Storm" };
+    -- Will contain the message to be repeated to the peeps
+    BGAnnounce = nil;
+    -- Placeholder for the selected strategy
+    strategy = nil;
+    -- Tell if the addon is ready
+    enabled = false;
+    -- Tell if we have recorded results
+    recorded = false;
+ 
+    -- Load the models for the different battlegrounds
+    loadBattlegrounds()
 
 end
 
@@ -33,11 +47,7 @@ end
 -- user or called by another program.
 function BattleAdvisor_SlashProcessor(msg)
     if msg == 'show' then
-        BA_MainFrame:Show();
-        BA_PanelFrame:Hide();
     elseif msg == 'hide' then
-        BA_MainFrame:Hide();
-        BA_PanelFrame:Hide();
     else
         print("Syntax: /ba or /battleadvisor.\n" ..
                 "Available options:\n" .. "-show\n-hide");
@@ -51,19 +61,27 @@ function StartFrames()
     BA_MainFrame:SetHeight("140")
     BA_MainFrame:SetStatusText("AceGUI-3.0 Example Container Frame")
     -- When the frame is closed
-    BA_MainFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+    -- BA_MainFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
     BA_MainFrame:SetLayout("Flow")
     print "-- Battle Advisor Main Frame Created!"
 
     -- Add a button for AB
     local AB_Button = AceGUI:Create("Button")
-    AB_Button:SetWidth(35)
+    AB_Button:SetWidth(50)
     AB_Button:SetHeight(35)
     AB_Button:SetText("AB")
-    AB_Button:SetCallback("AB_ButtonClick")
+    AB_Button:SetCallback("BG_ButtonClick")
+    AB_Button:BG = AV
     BA_MainFrame:AddChild(AB_Button)
 end
 
+
+function BG_ButtonClick(widget)
+    -- Get the BG we are talking about
+    local bg = widget:BG
+
+    print("" .. bg.title .. " Button Clicked!" )
+end
 
 -- ========================================================
 -- LEGACY CODE
@@ -71,19 +89,7 @@ end
 
 -- Executed when we load the AddOn.
 function BattleAdvisor_OnLoad()
-    -- Global variables
-    BGs =   {"Alterac Valley", "Isle of Conquest", "Warsong Gulch",
-                "Arathi Basin", "Eye of the Storm" };
-    
-    -- Will contain the message to be repeated to the peeps
-    BGAnnounce = nil;
-    -- Placeholder for the selected strategy
-    strategy = nil;
-    -- Tell if the addon is ready
-    enabled = false;
-    -- Tell if we have recorded results
-    recorded = false;
-    
+   
     -- Load the BGs
     loadBattlegrounds();
     
