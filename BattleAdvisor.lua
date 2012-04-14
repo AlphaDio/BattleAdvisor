@@ -12,17 +12,7 @@ function BattleAdvisorAddon:OnInitialize()
     -- Create the slash commands
     BattleAdvisorAddon:RegisterChatCommand("ba", "BattleAdvisor_SlashProcessor")
     BattleAdvisorAddon:RegisterChatCommand("battleadvisor", "BattleAdvisor_SlashProcessor")
-    -- Global variables
-    BGs =   {"Alterac Valley", "Isle of Conquest", "Warsong Gulch",
-                "Arathi Basin", "Eye of the Storm" };
-    -- Will contain the message to be repeated to the peeps
-    BGAnnounce = nil;
-    -- Placeholder for the selected strategy
-    strategy = nil;
-    -- Tell if we have recorded results
-    recorded = false;
- 
-    -- Load the models for the different battlegrounds
+
     loadBattlegrounds()
 
 end
