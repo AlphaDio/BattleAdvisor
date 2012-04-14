@@ -1,8 +1,8 @@
-﻿SLASH_BATTLEADVISOR1, SLASH_BATTLEADVISOR2 = '/ba', '/battleadvisor';
+﻿SLASH_BATTLEADVISOR1, SLASH_BATTLEADVISOR2 = '/ba', '/battleadvisor'
 
 -- STARTING MAIN CODE --
 
-local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0", "AceGUI-3.0")
+local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0")
 
 -- When the addon is initialized and loaded.
 function BattleAdvisorAddon:OnInitialize()
