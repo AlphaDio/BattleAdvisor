@@ -3,14 +3,13 @@
 ## Author: Dantelion
 ## Notes: This addon provide a way to come up with a quick strategy for BGs.
 ## DefaultState: Enabled
-## LoadOnDemand: 1
+## LoadOnDemand: 0
 ## SavedVariables: AV,WSG,IoC,AB,EotS
 
 embeds.xml
 
 BattleAdvisor.lua
 Battlegrounds.lua
-BattleAdvisor1.lua
 Helpers.lua
 Helpers-Graphical-.lua
 Helpers-Engine-.lua
