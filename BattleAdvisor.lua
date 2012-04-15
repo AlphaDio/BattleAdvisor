@@ -79,11 +79,24 @@ function BG_ButtonClick(widget)
 
     strategy = GetAStrategy(BGStrategies)
 
+    -- Print an intro to the strategy.
+    PrintIntro(bg, strategy)
 
+    -- Role assignment
+    RoleAssignment(bg, strategy)
 
     print("" .. bg.title .. " Button Clicked!" )
 end
 
+function RoleAssignment(bg, strategy)
+    local roles = strategy.roles
+    -- An object/hash that will contain the groups that have already been selected for a role.
+    local already_selected = {}
+
+    for i=1, # roles do
+        print("Role")
+    end
+end
 
 function GetAStrategy(strategies)
     -- we are going to need this number to save the strategy
