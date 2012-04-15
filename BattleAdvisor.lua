@@ -94,8 +94,51 @@ function RoleAssignment(bg, strategy)
     local already_selected = {}
 
     for i=1, # roles do
-        print("Role")
+        RoleSelection(i, bg, already_selected)
     end
+end
+
+-- Select a role
+function RoleSelection(i, bg, already_selected)
+    local groupNum  = bg.playersNum / 5
+    -- Get the role to be parsed
+    local role      = roles[i]     -- The role current overview
+    
+    -- Gets its infos
+    local spots     = role[1]      -- The numbers of spots in the role
+    local roleTitle = role[2]      -- The title of the role, like "Defenders"
+    local roleDescription = role[3] -- The responsabilities of this role
+    local selected = {}            -- the ones selected for the role
+
+    selected, already_selected = AssignGroups(spots, already_selected, groupNum)
+
+end
+
+function AssignGroups(spots, selection, maxGroups)
+    local selected = {}
+
+    -- for each spot needed pick a group and add it to the selection
+    for i=1, spots do
+        local valid = false
+
+        while valid == false do 
+            -- Choose a group randomly
+            local group = math.random(maxGroups)
+
+            -- Check if the group has already been selected or not
+            if (CheckIfGroupIsContained(group, selection)) then
+                -- We have already selectioned this group, we continue the loop
+            else
+                -- we have not yet selected this group, we add it to the table
+                table.insert(selection, group)
+                table.insert(selected, group)
+                -- Ensure the loop is stopped
+                valid = true
+            end
+        end
+    end
+
+    return selected, selection
 end
 
 function GetAStrategy(strategies)
@@ -148,8 +191,7 @@ end
 function BattleAdvisor_OnLoad()
    
     -- Load the BGs
-    loadBattlegrounds();
-    
+    loadBattlegrounds(); 
     -- Register the necessary events
     
     --
@@ -390,7 +432,7 @@ function battleground_message(message)
     
 end
 
-function assignGroups(spots, selection, maxGroups)
+function fake_assignGroups(spots, selection, maxGroups)
     -- Now we need to know which group is going to go on O
     local selected = {};
     
