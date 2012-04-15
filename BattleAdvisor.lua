@@ -124,7 +124,7 @@ function PrintRole(selected, roleTitle, roleDescription)
     local role_report = "Groups " .. niceGroupsText(selected) .. " randomly tasked with " .. roleTitle .. 
     " duty!\n--" .. roleDescription;
     
-    total_role_report += "\n" .. role_report .. "\n";
+    total_role_report = total_role_report .. "\n" .. role_report .. "\n";
 
     BG_Message(role_report)
 end
