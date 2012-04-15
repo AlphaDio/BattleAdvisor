@@ -56,16 +56,22 @@ function StartFrames()
     BA_MainFrame:SetLayout("Flow")
     print "-- Battle Advisor Main Frame Created!"
 
-    -- Add a button for AB
-    local AB_Button = AceGUI:Create("Button")
-    AB_Button:SetWidth(50)
-    AB_Button:SetHeight(35)
-    AB_Button:SetText("AB")
-    AB_Button:SetCallback("OnClick", BG_ButtonClick)
-    AB_Button.BG = AB
-    BA_MainFrame:AddChild(AB_Button)
+    MakeBG_Button(AB)
+    MakeBG_Button(AV)
+    MakeBG_Button(WSG)
+    MakeBG_Button(IoC)
+    MakeBG_Button(EotS)
 end
 
+function MakeBG_Button(bg)
+    local button = AceGUI:Create("Button")
+    button:SetWidth(50)
+    button:SetHeight(35)
+    button:SetText("AB")
+    button:SetCallback("OnClick", BG_ButtonClick)
+    button.BG = bg
+    BA_MainFrame:AddChild(button)
+end
 
 function BG_ButtonClick(widget)
     -- Get the BG we are talking about
