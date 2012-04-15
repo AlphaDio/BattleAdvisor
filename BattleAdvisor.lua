@@ -77,6 +77,7 @@ function BG_ButtonClick(widget)
 
     print("The number of IoC Strategy disponible: " .. # BGStrategies);
 
+    total_role_report = ""
     strategy = GetAStrategy(BGStrategies)
 
     -- Print an intro to the strategy.
@@ -116,8 +117,16 @@ function RoleSelection(i, bg, roles, already_selected)
     strategy.roles[i].selection = selected
 
     -- Send the message for this role
-    --PrintRole(selected)
-    print(selected)
+    PrintRole(selected, roleTitle, roleDescription)
+end
+
+function PrintRole(selected, roleTitle, roleDescription)
+    local role_report = "Groups " .. niceGroupsText(selected) .. " randomly tasked with " .. roleTitle .. 
+    " duty!\n--" .. roleDescription;
+    
+    total_role_report += "\n" .. role_report .. "\n";
+
+    BG_Message(role_report)
 end
 
 function AssignGroups(spots, selection, maxGroups)
@@ -564,8 +573,8 @@ function BgButton_OnClick(bg)
     if enabled then
         print("Button Clicked!");
         
-        local playersNum    = bg.playersNum;
-        local numGroups     = playersNum / 5;
+        local playersNum      = bg.playersNum;
+        local numGroups       = playersNum / 5;
         local BGStrategies    = bg.strategy;
         
         -- Debug
