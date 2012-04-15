@@ -61,7 +61,6 @@ function StartFrames()
     AB_Button:SetHeight(35)
     AB_Button:SetText("AB")
     AB_Button:SetCallback("OnClick", BG_ButtonClick)
-    -- function(widget) print("Button Clicked!") end)
     AB_Button.BG = AB
     BA_MainFrame:AddChild(AB_Button)
 end
@@ -74,6 +73,8 @@ function BG_ButtonClick(widget)
     local playersNum    = bg.playersNum
     local numGroups     = playersNum / 5
     local BGStrategies  = bg.strategy
+
+    print("The number of IoC Strategy disponible: " .. # BGStrategies);
 
     print("" .. bg.title .. " Button Clicked!" )
 end
