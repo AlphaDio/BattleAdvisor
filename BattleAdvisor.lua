@@ -112,6 +112,12 @@ function RoleSelection(i, bg, already_selected)
 
     selected, already_selected = AssignGroups(spots, already_selected, groupNum)
 
+    -- tell the global strategy about the selection
+    strategy.roles[i].selection = selected
+
+    -- Send the message for this role
+    --PrintRole(selected)
+    print(selected)
 end
 
 function AssignGroups(spots, selection, maxGroups)
@@ -139,6 +145,17 @@ function AssignGroups(spots, selection, maxGroups)
     end
 
     return selected, selection
+end
+
+function CheckIfGroupIsContained(group, selectedGroups)
+    for i=1, # selectedGroups do
+        -- If the group number is in the "already selected" array
+        if group == selectedGroups[i] then
+            return true
+        end
+    end
+    -- We haven't found it
+    return false
 end
 
 function GetAStrategy(strategies)
