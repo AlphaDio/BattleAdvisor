@@ -60,8 +60,8 @@ function StartFrames()
     AB_Button:SetWidth(50)
     AB_Button:SetHeight(35)
     AB_Button:SetText("AB")
-    AB_Button:SetCallback("BG_ButtonClick")
-    AB_Button.BG = AV
+    AB_Button:SetCallback("OnClick", "BG_ButtonClick")
+    AB_Button.BG = AB
     BA_MainFrame:AddChild(AB_Button)
 end
 
@@ -69,6 +69,10 @@ end
 function BG_ButtonClick(widget)
     -- Get the BG we are talking about
     local bg = widget.BG
+
+    local playersNum    = bg.playersNum
+    local numGroups     = playersNum / 5
+    local BGStrategies  = bg.strategy
 
     print("" .. bg.title .. " Button Clicked!" )
 end
