@@ -94,12 +94,12 @@ function RoleAssignment(bg, strategy)
     local already_selected = {}
 
     for i=1, # roles do
-        RoleSelection(i, bg, already_selected)
+        RoleSelection(i, bg, roles, already_selected)
     end
 end
 
 -- Select a role
-function RoleSelection(i, bg, already_selected)
+function RoleSelection(i, bg, roles, already_selected)
     local groupNum  = bg.playersNum / 5
     -- Get the role to be parsed
     local role      = roles[i]     -- The role current overview
