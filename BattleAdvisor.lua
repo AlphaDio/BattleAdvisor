@@ -87,9 +87,9 @@ end
 
 function GetAStrategy(strategies)
     -- we are going to need this number to save the strategy
-    local stratNum = floor(math.random(100) / (100 / # BGStrategies) + 1) -- Magic Numbers!!!
+    local stratNum = floor(math.random(100) / (100 / # strategies) + 1) -- Magic Numbers!!!
     
-    strategy = BGStrategies[stratNum]
+    strategy = strategies[stratNum]
     return strategy
 end
 
