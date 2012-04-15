@@ -121,7 +121,7 @@ end
 
 -- Responsible for printing messages.
 function BG_Message(text)
-    local s = { strsplit("\n", message) };
+    local s = { strsplit("\n", text) };
     
     local size = # s;
 
@@ -138,7 +138,7 @@ function BG_Message(text)
             end
         end
     end
- end
+end
 
 -- ========================================================
 -- LEGACY CODE
