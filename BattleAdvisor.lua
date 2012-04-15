@@ -1,5 +1,5 @@
 ﻿SLASH_BATTLEADVISOR1, SLASH_BATTLEADVISOR2 = '/ba', '/battleadvisor'
-debug = true
+debug = false
 
 -- STARTING MAIN CODE --
 
