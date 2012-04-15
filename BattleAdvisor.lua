@@ -1,8 +1,9 @@
 ﻿SLASH_BATTLEADVISOR1, SLASH_BATTLEADVISOR2 = '/ba', '/battleadvisor'
+debug = true
 
 -- STARTING MAIN CODE --
 
-local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0", "AceEvent-3.0", "AceComm-3.0")
+local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0", "AceComm-3.0")
 -- Embed An AceGUI instance to help with the creation of frames
 AceGUI = LibStub("AceGUI-3.0")
 
@@ -76,8 +77,55 @@ function BG_ButtonClick(widget)
 
     print("The number of IoC Strategy disponible: " .. # BGStrategies);
 
+    strategy = GetAStrategy(BGStrategies)
+
+
+
     print("" .. bg.title .. " Button Clicked!" )
 end
+
+
+function GetAStrategy(strategies)
+    -- we are going to need this number to save the strategy
+    local stratNum = floor(math.random(100) / (100 / # BGStrategies) + 1) -- Magic Numbers!!!
+    
+    strategy = BGStrategies[stratNum]
+    return strategy
+end
+
+function Herald(bg, strategy)
+    -- The numbers of groups in the BGs
+    local groupNum = bg.playersNum / 5
+    
+end
+
+function PrintIntro(bg, strategy)
+    -- Print the intro
+    local intro = "Battle Advisor:\n<" .. bg.title ..
+        "> Strategy Selected: " .. strategy.title;
+    BG_Message(intro)
+end
+
+-- Responsible for printing messages.
+function BG_Message(text)
+    local s = { strsplit("\n", message) };
+    
+    local size = # s;
+
+    -- if we actually have a valid table
+    if (size ~= nil) then
+        --  for each entry in the table
+        for i=1, size do
+            if debug then
+                -- Only print it
+                print(s[i])
+            else
+                -- Ready for production
+                SendChatMessage(s[i], "BATTLEGROUND", nil, nil)
+            end
+        end
+    end
+ end
 
 -- ========================================================
 -- LEGACY CODE
@@ -375,7 +423,7 @@ function niceGroupsText(groups)
 end
 
 -- Herald the strategy to everyone!!
-function herald(bg, strategy)
+function fake_herald(bg, strategy)
 
     -- The numbers of groups in the BGs
     local groupNum = bg.playersNum / 5;
