@@ -51,7 +51,7 @@ function StartFrames()
     BA_MainFrame:SetHeight("140")
     BA_MainFrame:SetStatusText("AceGUI-3.0 Example Container Frame")
     -- When the frame is closed
-    -- BA_MainFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+    BA_MainFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
     BA_MainFrame:SetLayout("Flow")
     print "-- Battle Advisor Main Frame Created!"
 
