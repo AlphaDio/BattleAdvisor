@@ -60,7 +60,7 @@ function StartFrames()
     AB_Button:SetWidth(50)
     AB_Button:SetHeight(35)
     AB_Button:SetText("AB")
-    AB_Button:SetCallback("OnClick", "BG_ButtonClick")
+    AB_Button:SetCallback("OnClick", function(widget) print("Button Clicked!") end)
     AB_Button.BG = AB
     BA_MainFrame:AddChild(AB_Button)
 end
