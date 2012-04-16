@@ -676,16 +676,12 @@ end
 
 function AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
     playerMessage = { player = tempPlayer, title = roleTitle, description = roleDescription }
-
-    -- Need to make some checks to ensure we don't have multiples
     queue.store(playerMessage)
 end
 
 function ZoneChanged()
     -- Empty the queue of messages just in case.
     queue = []
-    -- Empty the array of players already treated.
-    treated_queue = []
 end
 
 -- Battle Advisor Battleground Event
