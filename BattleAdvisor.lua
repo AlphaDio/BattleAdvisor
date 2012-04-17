@@ -18,16 +18,14 @@ function BattleAdvisorAddon:OnInitialize()
     BattleAdvisorAddon:RegisterChatCommand("battleadvisor", "BattleAdvisor_SlashProcessor")
 
     loadBattlegrounds()
-
-    BattleAdvisorAddon:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChanged")
-    -- BattleAdvisorAddon:RegisterEvent("CHAT_MSG_BATTLEGROUND", "CommunicationEvent")
 end
 
 -- When the addon is enabled.
 function BattleAdvisorAddon:OnEnable()
     -- Create the frames
     StartFrames()
-    BA_MainFrame:RegisterEvent("CHAT_MSG_BATTLEGROUND");
+    BattleAdvisorAddon:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChanged")
+    BattleAdvisorAddon:RegisterEvent("CHAT_MSG_BATTLEGROUND", "AdviceAsked")
 end
 
 -- When the addon is disabled.
@@ -572,7 +570,7 @@ function updateRecord(HordeVictory)
 end
 
 -- Battle Advisor Battleground Whisper Handler
-function BattleAdvisorAddon:CommunicationEvent(arg1, arg2)
+function BattleAdvisorAddon:AdviceAsked(event_name, arg1, arg2)
     print("CommunicationEvent")
     local message   = arg1;
     local author    = arg2;
@@ -635,7 +633,7 @@ function AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
     queue.tinsert(playerMessage)
 end
 
-function BattleAdvisorAddon:ZoneChanged()
+function BattleAdvisorAddon:ZoneChanged(event_name)
     --
     print("Zone Changed, Resetting!")
     -- Empty the queue of messages just in case.
