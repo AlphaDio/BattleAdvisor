@@ -69,7 +69,7 @@ end
 
 function MakeBG_Button(bg)
     local button = AceGUI:Create("Button")
-    button:SetWidth(70)
+    button:SetWidth(60)
     button:SetHeight(35)
     button:SetText(bg.nick)
     button:SetCallback("OnClick", BG_ButtonClick)
