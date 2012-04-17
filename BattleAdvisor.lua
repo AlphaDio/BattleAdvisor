@@ -695,7 +695,7 @@ function AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
     queue.tinsert(playerMessage)
 end
 
-function ZoneChanged()
+function BattleAdvisorAddon:ZoneChanged()
     -- Empty the queue of messages just in case.
     queue = {}
     -- Empty the array of players already treated.
@@ -706,7 +706,7 @@ function StartResponder()
     responder = BattleAdvisorAddon:ScheduleRepeatingTimer("ResponderFeedback", 5)
 end
 
-function ResponderFeedback()
+function BattleAdvisorAddon:ResponderFeedback()
     print("ResponderFired!")
     size = # queue
     print("" .. size .. " in Queue!")
