@@ -704,7 +704,7 @@ function BattleAdvisorAddon:ZoneChanged()
     -- Empty the array of players already treated.
     treated_queue = {}
     -- Stop the timer
-    BattleAdvisorAddong:CancelTimer(responder)
+    BattleAdvisorAddon:CancelTimer(responder)
 end
 
 function StartResponder()
