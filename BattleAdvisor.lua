@@ -21,13 +21,13 @@ function BattleAdvisorAddon:OnInitialize()
 
     BattleAdvisorAddon:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChanged")
     -- BattleAdvisorAddon:RegisterEvent("CHAT_MSG_BATTLEGROUND", "CommunicationEvent")
-    BA_MainFrame:RegisterEvent("CHAT_MSG_BATTLEGROUND");
 end
 
 -- When the addon is enabled.
 function BattleAdvisorAddon:OnEnable()
     -- Create the frames
     StartFrames()
+    BA_MainFrame:RegisterEvent("CHAT_MSG_BATTLEGROUND");
 end
 
 -- When the addon is disabled.
