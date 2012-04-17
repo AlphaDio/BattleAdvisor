@@ -630,7 +630,7 @@ function AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
     playerMessage = { player = tempPlayer, title = roleTitle, description = roleDescription }
 
     -- Need to make some checks to ensure we don't have multiples
-    queue.tinsert(playerMessage)
+    tinsert(queue, playerMessage)
 end
 
 function BattleAdvisorAddon:ZoneChanged(event_name)
@@ -655,7 +655,7 @@ function BattleAdvisorAddon:ResponderFeedback()
     -- Create a message for one of the player in the queue
     if size > 0 then
         -- Take the last in queue
-        p = queue.tremove()
+        p = tremove(queue)
         SendRoleToPlayer(p)
     end
 end
