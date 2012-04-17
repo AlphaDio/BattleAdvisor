@@ -640,8 +640,11 @@ function BattleAdvisorAddon:ZoneChanged(event_name)
     queue = {}
     -- Empty the array of players already treated.
     treated_queue = {}
-    -- Stop the timer
-    BattleAdvisorAddon:CancelTimer(responder)
+    -- Stop the timer if we have an object in responder
+    if responder != nil then
+        BattleAdvisorAddon:CancelTimer(responder)
+        responder = nil
+    end
 end
 
 function StartResponder()
@@ -649,11 +652,10 @@ function StartResponder()
 end
 
 function BattleAdvisorAddon:ResponderFeedback()
-    print("ResponderFired!")
     size = # queue
-    print("" .. size .. " in Queue!")
     -- Create a message for one of the player in the queue
     if size > 0 then
+        print("" .. size .. " in Queue!")
         -- Take the last in queue
         p = tremove(queue)
         SendRoleToPlayer(p)
