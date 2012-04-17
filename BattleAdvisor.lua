@@ -637,6 +637,7 @@ end
 
 -- Battle Advisor Battleground Whisper Handler
 function BattleAdvisorAddon:CommunicationEvent(arg1, arg2)
+    print("CommunicationEvent")
     local message   = arg1;
     local author    = arg2;
     local nums      = GetNumRaidMembers();
