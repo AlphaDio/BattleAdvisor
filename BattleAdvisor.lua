@@ -20,7 +20,8 @@ function BattleAdvisorAddon:OnInitialize()
     loadBattlegrounds()
 
     BattleAdvisorAddon:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChanged")
-    BattleAdvisorAddon:RegisterEvent("CHAT_MSG_BATTLEGROUND", "CommunicationEvent")
+    -- BattleAdvisorAddon:RegisterEvent("CHAT_MSG_BATTLEGROUND", "CommunicationEvent")
+    BA_MainFrame:RegisterEvent("CHAT_MSG_BATTLEGROUND");
 end
 
 -- When the addon is enabled.
@@ -235,7 +236,6 @@ function BattleAdvisor_OnLoad()
     -- Register the necessary events
     
     --
-    BA_MainFrame:RegisterEvent("CHAT_MSG_BATTLEGROUND");
     -- Whenever we change zone, for example enter a battleground
     BA_MainFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA");
     -- Whenever an event on Horde side happens
@@ -259,74 +259,10 @@ function BattleAdvisor_OnEvent()
 
     -- When a player whisper us, need to find a way to distribute the workload among people
     if event == "CHAT_MSG_BATTLEGROUND" then
-        
+        print("BOOYAAAAHHHHHHH")
     end
 
-    -- If it is a BG Horde message
-    if event == "CHAT_MSG_BG_SYSTEM_HORDE" or 
-            event == "CHAT_MSG_BG_SYSTEM_ALLIANCE" or 
-            event == "CHAT_MSG_BG_SYSTEM_NEUTRAL" then
-        BattleAdvisor_BGEvent(arg1);
-    end
-    
-    -- Everytime we have an event on the BG
-    if event == "UPDATE_BATTLEFIELD_STATUS" then
-        
-    end
-    
-    -- If it is a change of zone, possibly entering a BG
-    if (event == "ZONE_CHANGED_NEW_AREA") then
-        print("Zone Changed!!");
-        
-        -- Unlock the BG buttons so that they can be used
-        -- // Should automatize this
-        unlockMode();
-        
-        -- Get the location we just entered
-        local location = GetRealZoneText();
-        
-        -- Check if we are actually in a Battleground
-        if isBG(location) then
-            -- We must reset the addon
-            BA_MainFrame:Show();
-        else
-            BA_MainFrame:Hide();
-        end
-        
-    end
-    
-    -- If it is the loading of the AddOn
-    if event == "ADDON_LOADED" and arg1 == "BattleAdvisor" then
-    
-        -- Load the variables for the different battlegrounds
-        loadBattlegrounds();
-        
-        isAvailable = "true";
-        standing = 1; -- Default standing
-        playerName, playerRealm = UnitName("player", true);
-    
-        -- Create a general Frame
-        -- BA_GeneralFrame =
-        --     CreateFrame("Frame", "BA_GeneralFrame", UIParent, "BA_TemplateMainFrame");
-    
-        -- createMainFrame();
-        createPanelFrame();
-        
-        -- Tell the rest of the program that the variables are
-        -- ready
-        enabled = true;
-        
-        print("Variables Available!!");
-    end
-    
-    -- The handling of the role asking distribution
-    if event == "CHAT_MSG_ADDON" then
-        
-        if arg1 == "BA" then
-            handleMSG(arg2);
-        end
-    end
-    
+   
 end
 
 -- This function role is to handle when we receive a addon message and redistribute
@@ -644,7 +580,7 @@ function BattleAdvisorAddon:CommunicationEvent(arg1, arg2)
     local tempPlayer;
     local found     = false;
 
-    if arg1 == "advice" then
+    if message == "advice" then
         print("Got a Request!")
         for i=1, nums do
             tempPlayer = {GetRaidRosterInfo(i)};
@@ -700,6 +636,8 @@ function AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
 end
 
 function BattleAdvisorAddon:ZoneChanged()
+    --
+    print("Zone Changed, Resetting!")
     -- Empty the queue of messages just in case.
     queue = {}
     -- Empty the array of players already treated.
