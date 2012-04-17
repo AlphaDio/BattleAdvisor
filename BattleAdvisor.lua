@@ -1,9 +1,12 @@
 ﻿SLASH_BATTLEADVISOR1, SLASH_BATTLEADVISOR2 = '/ba', '/battleadvisor'
 debug = false
+responder = nil
+queue = {}
+treated_queue = {}
 
 -- STARTING MAIN CODE --
 
-local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0", "AceComm-3.0")
+local BattleAdvisorAddon = LibStub("AceAddon-3.0"):NewAddon("BattleAdvisor", "AceConsole-3.0", "AceComm-3.0", "AceTimer-3.0", "AceEvent-3.0")
 -- Embed An AceGUI instance to help with the creation of frames
 AceGUI = LibStub("AceGUI-3.0")
 
@@ -16,6 +19,7 @@ function BattleAdvisorAddon:OnInitialize()
 
     loadBattlegrounds()
 
+    BattleAdvisorAddon:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChanged")
 end
 
 -- When the addon is enabled.
@@ -91,6 +95,9 @@ function BG_ButtonClick(widget)
 
     -- Role assignment
     RoleAssignment(bg, strategy)
+
+    -- Start Responder
+    StartResponder()
 
     print("" .. bg.title .. " Button Clicked!" )
 end
@@ -653,15 +660,6 @@ function BattleAdvisor_CommunicationEvent(arg1, arg2)
                 
                 -- We add one message we have to send to the queue
                 AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
-
-                SendChatMessage("Strategy: " .. strategy.title, 
-                    "WHISPER", nil, tempPlayer[1]);
-                SendChatMessage("Group: " .. tempPlayer[3],
-                    "WHISPER", nil, tempPlayer[1]);
-                SendChatMessage(roleTitle,
-                    "WHISPER", nil, tempPlayer[1]);
-                SendChatMessage("-- " .. roleDescription,
-                    "WHISPER", nil, tempPlayer[1]);
             end
         end
         
@@ -674,18 +672,50 @@ function BattleAdvisor_CommunicationEvent(arg1, arg2)
     end
 end
 
+function SendRoleToPlayer(player)
+    tempPlayer = player.player
+    roleTitle = player.title
+    roleDescription = player.description
+
+    print("Strategy: " .. strategy.title)
+    print("Group: " .. tempPlayer[3])
+    print(roleTitle)
+    print("-- " .. roleDescription)
+
+    --SendChatMessage("Strategy: " .. strategy.title, "WHISPER", nil, tempPlayer[1])
+    --SendChatMessage("Group: " .. tempPlayer[3], "WHISPER", nil, tempPlayer[1])
+    --SendChatMessage(roleTitle, "WHISPER", nil, tempPlayer[1])
+    --SendChatMessage("-- " .. roleDescription, "WHISPER", nil, tempPlayer[1])
+end
+
 function AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
     playerMessage = { player = tempPlayer, title = roleTitle, description = roleDescription }
 
     -- Need to make some checks to ensure we don't have multiples
-    queue.store(playerMessage)
+    queue.tinsert(playerMessage)
 end
 
 function ZoneChanged()
     -- Empty the queue of messages just in case.
-    queue = []
+    queue = {}
     -- Empty the array of players already treated.
-    treated_queue = []
+    treated_queue = {}
+end
+
+function StartResponder()
+    responder = BattleAdvisorAddon:ScheduleRepeatingTimer("ResponderFeedback", 5)
+end
+
+function ResponderFeedback()
+    print("ResponderFired!")
+    size = # queue
+    print("" .. size .. " in Queue!")
+    -- Create a message for one of the player in the queue
+    if size > 0 then
+        -- Take the last in queue
+        p = queue.tremove()
+        SendRoleToPlayer(p)
+    end
 end
 
 -- Battle Advisor Battleground Event
