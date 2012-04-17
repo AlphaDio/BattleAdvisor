@@ -1,5 +1,5 @@
 ﻿SLASH_BATTLEADVISOR1, SLASH_BATTLEADVISOR2 = '/ba', '/battleadvisor'
-debug = false
+debug = true
 responder = nil
 queue = {}
 treated_queue = {}
@@ -20,6 +20,7 @@ function BattleAdvisorAddon:OnInitialize()
     loadBattlegrounds()
 
     BattleAdvisorAddon:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChanged")
+    BattleAdvisorAddon:RegisterEvent("CHAT_MSG_BATTLEGROUND", "CommunicationEvent")
 end
 
 -- When the addon is enabled.
@@ -69,7 +70,7 @@ end
 
 function MakeBG_Button(bg)
     local button = AceGUI:Create("Button")
-    button:SetWidth(50)
+    button:SetWidth(100)
     button:SetHeight(35)
     button:SetText(bg.nick)
     button:SetCallback("OnClick", BG_ButtonClick)
@@ -635,40 +636,42 @@ function updateRecord(HordeVictory)
 end
 
 -- Battle Advisor Battleground Whisper Handler
-function BattleAdvisor_CommunicationEvent(arg1, arg2)
+function BattleAdvisorAddon:CommunicationEvent(arg1, arg2)
     local message   = arg1;
     local author    = arg2;
     local nums      = GetNumRaidMembers();
     local tempPlayer;
     local found     = false;
-    
-    local i = 1;
-    while found == false do
-        tempPlayer = {GetRaidRosterInfo(i)};
-        
-        -- we find the target
-        if tempPlayer[1] == author then
-            local roleTitle;
-            local roleDescription;
+
+    if arg1 == "advice" then
+        print("Got a Request!")
+        for i=1, nums do
+            tempPlayer = {GetRaidRosterInfo(i)};
             
-            -- We found the player
-            found = true;
-            
-            if strategy.group then
-                -- we get his role in the strategy
-                roleTitle, roleDescription = GetRoleInfo(tempPlayer[3], true);
+            -- we find the target
+            if tempPlayer[1] == author then
+                local roleTitle;
+                local roleDescription;
                 
-                -- We add one message we have to send to the queue
-                AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
+                -- We found the player
+                found = true;
+                
+                if strategy.group then
+                    -- we get his role in the strategy
+                    roleTitle, roleDescription = GetRoleInfo(tempPlayer[3], true);
+                    
+                    -- We add one message we have to send to the queue
+                    AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
+                end
             end
+            
+            i = i + 1;
         end
         
-        i = i + 1;
-    end
-    
-    if found == false then
-        SendChatMessage("Sorry couldn't find your role!",
-                    "WHISPER", nil, author);
+        if found == false then
+            SendChatMessage("Sorry couldn't find your role!",
+                        "WHISPER", nil, author);
+        end
     end
 end
 
