@@ -1,5 +1,5 @@
 ﻿SLASH_BATTLEADVISOR1, SLASH_BATTLEADVISOR2 = '/ba', '/battleadvisor'
-debug = true
+debug = false
 responder = nil
 queue = {}
 treated_queue = {}
@@ -188,7 +188,7 @@ function GetAStrategy(strategies)
     return strategy
 end
 
-function Herald(bg, strategy)
+function Herald(bg, strategy)dviceButton_OnClick()
     -- The numbers of groups in the BGs
     local groupNum = bg.playersNum / 5
     
@@ -199,6 +199,7 @@ function PrintIntro(bg, strategy)
     local intro = "Battle Advisor:\n<" .. bg.title ..
         "> Strategy Selected: " .. strategy.title;
     BG_Message(intro)
+    AdviceButton_OnClick()
 end
 
 -- Responsible for printing messages.
@@ -555,7 +556,7 @@ end
 --
 function AdviceButton_OnClick()
     
-    battleground_message("Send 'advice' in /bg if don't know your group or your role!");
+    battleground_message("Send 'advice' in /bg if don't know your group or your role! Do not spam or advices will be delayed for everyone.");
 end
 
 function updateRecord(HordeVictory)
@@ -615,15 +616,10 @@ function SendRoleToPlayer(player)
     roleTitle = player.title
     roleDescription = player.description
 
-    print("Strategy: " .. strategy.title)
-    print("Group: " .. tempPlayer[3])
-    print(roleTitle)
-    print("-- " .. roleDescription)
-
-    --SendChatMessage("Strategy: " .. strategy.title, "WHISPER", nil, tempPlayer[1])
-    --SendChatMessage("Group: " .. tempPlayer[3], "WHISPER", nil, tempPlayer[1])
-    --SendChatMessage(roleTitle, "WHISPER", nil, tempPlayer[1])
-    --SendChatMessage("-- " .. roleDescription, "WHISPER", nil, tempPlayer[1])
+    SendChatMessage("Strategy: " .. strategy.title, "WHISPER", nil, tempPlayer[1])
+    SendChatMessage("Group: " .. tempPlayer[3], "WHISPER", nil, tempPlayer[1])
+    SendChatMessage(roleTitle, "WHISPER", nil, tempPlayer[1])
+    SendChatMessage("-- " .. roleDescription, "WHISPER", nil, tempPlayer[1])
 end
 
 function AddToMessageQueue(tempPlayer, roleTitle, roleDescription)
