@@ -199,7 +199,7 @@ function PrintIntro(bg, strategy)
     local intro = "Battle Advisor:\n<" .. bg.title ..
         "> Strategy Selected: " .. strategy.title;
     BG_Message(intro)
-    AdviceButton_OnClick()
+    AdviceMessage()
 end
 
 -- Responsible for printing messages.
@@ -554,7 +554,7 @@ function CopyButton_OnClick()
 end
 
 --
-function AdviceButton_OnClick()
+function AdviceMessage
     
     battleground_message("Send 'advice' in /bg if don't know your group or your role! Do not spam or advices will be delayed for everyone.");
 end
