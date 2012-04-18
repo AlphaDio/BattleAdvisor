@@ -53,7 +53,7 @@ function StartFrames()
     BA_MainFrame = AceGUI:Create("Frame")
     BA_MainFrame:SetTitle("Battle Advisor Main Frame")
     BA_MainFrame:SetWidth("250")
-    BA_MainFrame:SetHeight("140")
+    BA_MainFrame:SetHeight("125")
     BA_MainFrame:SetStatusText("AceGUI-3.0 Example Container Frame")
     -- When the frame is closed
     BA_MainFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
@@ -70,7 +70,7 @@ end
 function MakeBG_Button(bg)
     local button = AceGUI:Create("Button")
     button:SetWidth(60)
-    button:SetHeight(35)
+    button:SetHeight(30)
     button:SetText(bg.nick)
     button:SetCallback("OnClick", BG_ButtonClick)
     button.BG = bg
