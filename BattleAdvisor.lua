@@ -554,7 +554,7 @@ function CopyButton_OnClick()
 end
 
 --
-function AdviceMessage
+function AdviceMessage()
     
     battleground_message("Send 'advice' in /bg if don't know your group or your role! Do not spam or advices will be delayed for everyone.");
 end
